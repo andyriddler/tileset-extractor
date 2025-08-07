@@ -171,12 +171,12 @@ function onLoad() {
         xmlTileSet.setAttribute("tilewidth", tileWidth);
         xmlTileSet.setAttribute("tileheight", tileHeight);
         const xmlImage = document.createElement("image");
-        xmlImage.setAttribute("source", "tiles.png");
+        xmlImage.setAttribute("source", "tileset.png");
         xmlImage.setAttribute("width", extractedTilesWidth);
         xmlImage.setAttribute("height", extractedTilesHeight);
         xmlTileSet.appendChild(xmlImage);
         const xmlTileProperty = document.createElement("image");
-        xmlImage.setAttribute("source", "tiles.png");
+        xmlImage.setAttribute("source", "tileset.png");
         xmlImage.setAttribute("width", extractedTilesWidth);
         xmlImage.setAttribute("height", extractedTilesHeight);
         xmlTileSet.appendChild(xmlTileProperty);
@@ -206,7 +206,7 @@ function onLoad() {
         }
         xmlMap.appendChild(xmlTileSet);
         const xmlLayer = document.createElement("layer");
-        xmlLayer.setAttribute("name", "layer");
+        xmlLayer.setAttribute("name", "stage");
         xmlLayer.setAttribute("width", numCols);
         xmlLayer.setAttribute("height", numRows);
         const xmlData = document.createElement("data");
@@ -216,7 +216,12 @@ function onLoad() {
             xmlData.appendChild(xmlTile);
         }
         xmlLayer.appendChild(xmlData);
+        const xmlEntities = document.createElement("objectgroup");
+        xmlEntities.setAttribute("name", "entities");
         xmlMap.appendChild(xmlLayer);
+        xmlMap.appendChild(xmlEntities);
+        
+        
         const serializer = new XMLSerializer();
         let xmlString = serializer.serializeToString(xmlMap);
 
@@ -310,7 +315,7 @@ function onLoad() {
             tilesLayer.appendChild(canvas);
         }
         downloadTilesLink.href = createTilesDataURL();
-        downloadTilesLink.download = "tiles.png";
+        downloadTilesLink.download = "tileset.png";
     }
 
     function showTileset() {
